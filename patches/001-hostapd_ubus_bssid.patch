@@ -1,0 +1,10 @@
+--- a/source/package/network/services/hostapd/src/src/ap/ubus.c
++++ b/source/package/network/services/hostapd/src/src/ap/ubus.c
+@@ -516,6 +516,7 @@ int hostapd_ubus_handle_event(struct hos
+ 		type = types[req->type];
+ 
+ 	blob_buf_init(&b, 0);
++	blobmsg_add_macaddr(&b, "bssid", hapd->conf->bssid);
+ 	blobmsg_add_macaddr(&b, "address", addr);
+ 	if (req->mgmt_frame)
+ 		blobmsg_add_macaddr(&b, "target", req->mgmt_frame->da);
