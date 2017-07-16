@@ -1,1 +1,2 @@
 001-hostapd_ubus_bssid.patch
+002-hostapd-ubus-bssid-get-clients.patch
