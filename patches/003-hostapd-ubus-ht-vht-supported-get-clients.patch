@@ -1,0 +1,11 @@
+--- a/source/package/network/services/hostapd/src/src/ap/ubus.c
++++ b/source/package/network/services/hostapd/src/src/ap/ubus.c
+@@ -165,6 +165,8 @@ hostapd_bss_get_clients(struct ubus_cont
+ 	blob_buf_init(&b, 0);
+ 	blobmsg_add_u32(&b, "freq", hapd->iface->freq);
+ 	list = blobmsg_open_table(&b, "clients");
++	blobmsg_add_u8(&b, "ht_supported", ht_supported(hapd->iface->hw_features));
++	blobmsg_add_u8(&b, "vht_supported", vht_supported(hapd->iface->hw_features));
+ 	for (sta = hapd->sta_list; sta; sta = sta->next) {
+ 		int i;
+ 
