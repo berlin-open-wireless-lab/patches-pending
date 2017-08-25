@@ -2,3 +2,4 @@
 002-hostapd-ubus-bssid-get-clients.patch
 003-hostapd-ubus-ht-vht-supported-get-clients.patch
 004-hostapd-ubus-ht-vht-supported-probe.patch
+005-hostapd-ubus-channel-utilization-get-clients.patch
