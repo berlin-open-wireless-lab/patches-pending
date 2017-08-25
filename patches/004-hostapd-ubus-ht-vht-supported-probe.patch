@@ -1,11 +1,13 @@
 --- a/source/package/network/services/hostapd/src/src/ap/ubus.c
 +++ b/source/package/network/services/hostapd/src/src/ap/ubus.c
-@@ -558,6 +558,8 @@ int hostapd_ubus_handle_event(struct hos
+@@ -558,6 +558,10 @@ int hostapd_ubus_handle_event(struct hos
  	if (req->frame_info)
  		blobmsg_add_u32(&b, "signal", req->frame_info->ssi_signal);
  	blobmsg_add_u32(&b, "freq", hapd->iface->freq);
-+	blobmsg_add_u8(&b, "ht_support", req->elems->ht_capabilities != 0);
-+	blobmsg_add_u8(&b, "vht_support", req->elems->vht_capabilities != 0);
++	if (req->elems) {
++		blobmsg_add_u8(&b, "ht_support", req->elems->ht_capabilities != 0);
++		blobmsg_add_u8(&b, "vht_support", req->elems->vht_capabilities != 0);
++	}
  
  	if (!hapd->ubus.notify_response) {
  		ubus_notify(ctx, &hapd->ubus.obj, type, b.head, -1);
