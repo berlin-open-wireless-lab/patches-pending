@@ -5,3 +5,4 @@
 005-hostapd-ubus-channel-utilization-get-clients.patch
 006-enable-channel-utilization.patch
 007-hostapd-add-601-patch.patch
+008-hostapd-get-chan-util.patch
