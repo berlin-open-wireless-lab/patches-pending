@@ -1,0 +1,15 @@
+--- a/source/package/network/services/hostapd/src/src/ap/ubus.c
++++ b/source/package/network/services/hostapd/src/src/ap/ubus.c
+@@ -748,10 +748,10 @@ int hostapd_ubus_handle_event(struct hos
+ 		blobmsg_add_u8(&b, "vht_support", req->elems->vht_capabilities != 0);
+ 	}
+ 
+-	if (!hapd->ubus.notify_response) {
++	/*if (!hapd->ubus.notify_response) {
+ 		ubus_notify(ctx, &hapd->ubus.obj, type, b.head, -1);
+ 		return 0;
+-	}
++	}*/
+ 
+ 	if (ubus_notify_async(ctx, &hapd->ubus.obj, type, b.head, &ureq.nreq))
+ 		return 0;
