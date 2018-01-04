@@ -1,0 +1,10 @@
+--- a/source/package/network/services/hostapd/src/src/ap/ubus.c
++++ b/source/package/network/services/hostapd/src/src/ap/ubus.c
+@@ -774,6 +774,7 @@ void hostapd_ubus_notify(struct hostapd_
+ 		return;
+ 
+ 	blob_buf_init(&b, 0);
++	blobmsg_add_macaddr(&b, "bssid", hapd->conf->bssid);
+ 	blobmsg_add_macaddr(&b, "address", addr);
+ 
+ 	ubus_notify(ctx, &hapd->ubus.obj, type, b.head, -1);

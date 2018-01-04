@@ -1,0 +1,32 @@
+--- a/source/package/network/services/hostapd/src/src/ap/ubus.c
++++ b/source/package/network/services/hostapd/src/src/ap/ubus.c
+@@ -702,7 +702,7 @@ void hostapd_ubus_free_bss(struct hostap
+ 
+ struct ubus_event_req {
+ 	struct ubus_notify_request nreq;
+-	bool deny;
++	int resp;
+ };
+ 
+ static void
+@@ -710,8 +710,7 @@ ubus_event_cb(struct ubus_notify_request
+ {
+ 	struct ubus_event_req *ureq = container_of(req, struct ubus_event_req, nreq);
+ 
+-	if (ret)
+-		ureq->deny = true;
++	ureq->resp = ret;
+ }
+ 
+ int hostapd_ubus_handle_event(struct hostapd_data *hapd, struct hostapd_ubus_request *req)
+@@ -765,8 +764,8 @@ int hostapd_ubus_handle_event(struct hos
+ 	ureq.nreq.status_cb = ubus_event_cb;
+ 	ubus_complete_request(ctx, &ureq.nreq.req, 100);
+ 
+-	if (ureq.deny)
+-		return -1;
++	if (ureq.resp)
++		return ureq.resp;
+ 
+ 	return 0;
+ }
