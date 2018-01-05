@@ -8,3 +8,4 @@
  
  	[ "$wpa" -gt 0 ] && {
  		[ -n "$wpa_group_rekey"  ] && append bss_conf "wpa_group_rekey=$wpa_group_rekey" "$N"
+

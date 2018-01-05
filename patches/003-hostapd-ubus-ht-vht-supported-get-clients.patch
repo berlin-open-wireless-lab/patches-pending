@@ -9,3 +9,4 @@
  	list = blobmsg_open_table(&b, "clients");
  	for (sta = hapd->sta_list; sta; sta = sta->next) {
  		int i;
+

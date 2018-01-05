@@ -21,3 +21,4 @@
  	const struct hostapd_frame_info *frame_info;
  	const u8 *addr;
  };
+
