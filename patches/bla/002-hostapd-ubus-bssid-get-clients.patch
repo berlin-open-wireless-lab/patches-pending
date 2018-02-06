@@ -1,0 +1,45 @@
+--- a/source/package/network/services/hostapd/src/src/ap/ubus.c
++++ b/source/package/network/services/hostapd/src/src/ap/ubus.c
+@@ -137,6 +137,16 @@ hostapd_bss_ban_client(struct hostapd_da
+ 	eloop_register_timeout(0, time * 1000, hostapd_bss_del_ban, ban, hapd);
+ }
+ 
++static void
++blobmsg_add_macaddr(struct blob_buf *buf, const char *name, const u8 *addr)
++{
++	char *s;
++
++	s = blobmsg_alloc_string_buffer(buf, name, 20);
++	sprintf(s, MACSTR, MAC2STR(addr));
++	blobmsg_add_string_buffer(buf);
++}
++
+ static int
+ hostapd_bss_get_clients(struct ubus_context *ctx, struct ubus_object *obj,
+ 			struct ubus_request_data *req, const char *method,
+@@ -163,6 +173,7 @@ hostapd_bss_get_clients(struct ubus_cont
+ 	};
+ 
+ 	blob_buf_init(&b, 0);
++	blobmsg_add_macaddr(&b, "bssid", hapd->conf->bssid);
+ 	blobmsg_add_u32(&b, "freq", hapd->iface->freq);
+ 	list = blobmsg_open_table(&b, "clients");
+ 	for (sta = hapd->sta_list; sta; sta = sta->next) {
+@@ -240,16 +251,6 @@ hostapd_bss_del_client(struct ubus_conte
+ 	return 0;
+ }
+ 
+-static void
+-blobmsg_add_macaddr(struct blob_buf *buf, const char *name, const u8 *addr)
+-{
+-	char *s;
+-
+-	s = blobmsg_alloc_string_buffer(buf, name, 20);
+-	sprintf(s, MACSTR, MAC2STR(addr));
+-	blobmsg_add_string_buffer(buf);
+-}
+-
+ static int
+ hostapd_bss_list_bans(struct ubus_context *ctx, struct ubus_object *obj,
+ 		      struct ubus_request_data *req, const char *method,
+
