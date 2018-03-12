@@ -1,0 +1,23 @@
+--- /dev/null
++++ b/source/package/network/services/hostapd/patches/602-deny-other-reason-code.patch
+@@ -0,0 +1,20 @@
++--- a/src/ap/ieee802_11.c
+++++ b/src/ap/ieee802_11.c
++@@ -1766,7 +1766,7 @@ static void handle_auth(struct hostapd_d
++ 	if (hostapd_ubus_handle_event(hapd, &req)) {
++ 		wpa_printf(MSG_DEBUG, "Station " MACSTR " rejected by ubus handler.\n",
++ 			MAC2STR(mgmt->sa));
++-		resp = WLAN_STATUS_UNSPECIFIED_FAILURE;
+++		resp = WLAN_STATUS_AP_UNABLE_TO_HANDLE_NEW_STA;
++ 		goto fail;
++ 	}
++ 	if (res == HOSTAPD_ACL_PENDING)
++@@ -3071,7 +3071,7 @@ static void handle_assoc(struct hostapd_
++ 	if (hostapd_ubus_handle_event(hapd, &req)) {
++ 		wpa_printf(MSG_DEBUG, "Station " MACSTR " assoc rejected by ubus handler.\n",
++ 		       MAC2STR(mgmt->sa));
++-		resp = WLAN_STATUS_UNSPECIFIED_FAILURE;
+++		resp = WLAN_STATUS_AP_UNABLE_TO_HANDLE_NEW_STA;
++ 		goto fail;
++ 	}
++ 

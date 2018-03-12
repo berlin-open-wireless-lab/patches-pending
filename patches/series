@@ -6,11 +6,6 @@
 006-enable-channel-utilization.patch
 007-hostapd-add-601-patch.patch
 008-hostapd-get-chan-util.patch
-# 009-hostapd-fix-ubus-deny-auth-req.patch
 010-hostapd-ubus-bssid-deauth-disassoc.patch
 011-hostapd-get-clients-station-count.patch
 012-hostapd-get-clients-ssid.patch
-# 013-hostapd-add-602-patch.patch
-# 014-hostapd-patch-ubus-resp.patch
-# 015-hostapd-response-patch.patch
-# 016-libubox-jsonformating.patch
