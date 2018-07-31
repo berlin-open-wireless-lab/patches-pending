@@ -1,5 +1,1 @@
-# patches-pending
-Pending LEDE / OpenWrt Patches
-
-# pull request:
-
+## NO PATCHES NEEDED ANYMORE!
